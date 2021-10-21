@@ -11,7 +11,7 @@ EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BB7A1972-52F7-410B-B442-EF40D7F4ED94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchendiseService", "src\OzonEdu.MerchendiseService\OzonEdu.MerchendiseService.csproj", "{29E0A076-FF0A-4659-8F6B-70A223C1A040}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchendiseService.Presentation", "src\OzonEdu.MerchendiseService.Presentation\OzonEdu.MerchendiseService.Presentation.csproj", "{29E0A076-FF0A-4659-8F6B-70A223C1A040}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
