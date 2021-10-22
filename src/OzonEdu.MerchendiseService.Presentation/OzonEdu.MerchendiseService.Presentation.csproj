@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <RootNamespace>OzonEdu.MerchendiseService</RootNamespace>
+        <RootNamespace>OzonEdu.MerchendiseService.Presentation</RootNamespace>
     </PropertyGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace OzonEdu.MerchendiseService
+namespace OzonEdu.MerchendiseService.Presentation
 {
     public class Program
     {

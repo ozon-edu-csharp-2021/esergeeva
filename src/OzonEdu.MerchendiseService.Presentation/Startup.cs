@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace OzonEdu.MerchendiseService
+namespace OzonEdu.MerchendiseService.Presentation
 {
     public class Startup
     {
