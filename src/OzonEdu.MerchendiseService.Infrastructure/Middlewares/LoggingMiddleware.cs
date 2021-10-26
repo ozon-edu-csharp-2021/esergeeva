@@ -16,6 +16,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Middlewares
         private readonly ILogger<LoggingMiddleware> _logger;
         private readonly RecyclableMemoryStreamManager _recyclableMemoryStreamManager = new();
         private const int ReadChunkBufferLength = 4096;
+        private static readonly JsonSerializerOptions JsonSerializerOptions = new() {WriteIndented = true};
 
         public LoggingMiddleware(RequestDelegate next, ILogger<LoggingMiddleware> logger)
         {
@@ -67,7 +68,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Middlewares
                     Request = request,
                     Response = response
                 };
-                _logger.LogInformation(JsonSerializer.Serialize(requestResponseModel));
+                _logger.LogInformation(JsonSerializer.Serialize(requestResponseModel, JsonSerializerOptions));
             }
             catch (Exception e)
             {
@@ -147,7 +148,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Middlewares
                 data = JsonDocument.Parse(input);
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 data = null;
                 return false;
