@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1515E831-3322-40D6-9752-6BF5151FD15F}"
 EndProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BB7A1972
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchendiseService.Presentation", "src\OzonEdu.MerchendiseService.Presentation\OzonEdu.MerchendiseService.Presentation.csproj", "{29E0A076-FF0A-4659-8F6B-70A223C1A040}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchendiseService.Infrastructure", "src\OzonEdu.MerchendiseService.Infrastructure\OzonEdu.MerchendiseService.Infrastructure.csproj", "{605AFA41-AF86-4A2E-B9EF-5FD878D59462}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,11 +22,16 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{29E0A076-FF0A-4659-8F6B-70A223C1A040} = {1515E831-3322-40D6-9752-6BF5151FD15F}
+		{605AFA41-AF86-4A2E-B9EF-5FD878D59462} = {1515E831-3322-40D6-9752-6BF5151FD15F}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{29E0A076-FF0A-4659-8F6B-70A223C1A040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29E0A076-FF0A-4659-8F6B-70A223C1A040}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29E0A076-FF0A-4659-8F6B-70A223C1A040}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29E0A076-FF0A-4659-8F6B-70A223C1A040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{605AFA41-AF86-4A2E-B9EF-5FD878D59462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{605AFA41-AF86-4A2E-B9EF-5FD878D59462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{605AFA41-AF86-4A2E-B9EF-5FD878D59462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{605AFA41-AF86-4A2E-B9EF-5FD878D59462}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -6,4 +6,5 @@
         <RootNamespace>OzonEdu.MerchendiseService.Presentation</RootNamespace>
     </PropertyGroup>
 
+      <ProjectReference Include="..\OzonEdu.MerchendiseService.Infrastructure\OzonEdu.MerchendiseService.Infrastructure.csproj" />
 </Project>
