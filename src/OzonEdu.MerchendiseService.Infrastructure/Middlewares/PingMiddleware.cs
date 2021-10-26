@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace OzonEdu.MerchendiseService.Infrastructure.Middlewares
 {
-    public class PingMiddleware
+    public sealed class PingMiddleware
     {
         public PingMiddleware(RequestDelegate next)
         {

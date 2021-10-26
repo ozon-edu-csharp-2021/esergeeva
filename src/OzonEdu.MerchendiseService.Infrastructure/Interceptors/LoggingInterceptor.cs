@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace OzonEdu.MerchendiseService.Infrastructure.Interceptors
 {
-    public class LoggingInterceptor : Interceptor
+    public sealed class LoggingInterceptor : Interceptor
     {
         private readonly ILogger<LoggingInterceptor> _logger;
         private static readonly JsonSerializerOptions JsonSerializerOptions = new() {WriteIndented = true};

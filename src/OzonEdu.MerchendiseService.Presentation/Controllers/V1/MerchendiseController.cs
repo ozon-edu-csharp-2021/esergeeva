@@ -15,7 +15,7 @@ namespace OzonEdu.MerchendiseService.Presentation.Controllers.V1
         }
 
         [HttpPost("request", Name = nameof(RequestMerchendise))]
-        public ActionResult<MerchendiseInfoResponse> RequestMerchendise(MerchendiseRequest merchendiseRequest)
+        public ActionResult<MerchendiseInfoResponse> RequestMerchendise([FromBody] MerchendiseRequest merchendiseRequest)
         {
             return Ok(new MerchendiseInfoResponse());
         }
