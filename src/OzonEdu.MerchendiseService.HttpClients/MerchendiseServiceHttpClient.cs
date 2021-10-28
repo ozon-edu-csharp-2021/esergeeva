@@ -16,19 +16,19 @@ namespace OzonEdu.MerchendiseService.HttpClients
             _httpClient = httpClient;
         }
 
-        public async Task<MerchendiseInfoResponse?> V1GetAllMerchendise(long employeeId, CancellationToken token)
+        public async Task<GetAllMerchendiseResponse?> V1GetAllMerchendise(long employeeId, CancellationToken token)
         {
             using var response = await _httpClient.GetAsync($"v1/api/merch/get-all?employeeId={employeeId}", token);
             var body = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<MerchendiseInfoResponse>(body);
+            return JsonSerializer.Deserialize<GetAllMerchendiseResponse>(body);
         }
 
-        public async Task<MerchendiseInfoResponse?> V1RequestMerchendise(MerchendiseRequest merchendiseRequest, CancellationToken token)
+        public async Task<RequestMerchendiseResponse?> V1RequestMerchendise(RequestMerchendiseRequest merchendiseRequest, CancellationToken token)
         {
             var content = JsonContent.Create(merchendiseRequest);
             using var response = await _httpClient.PostAsync("v1/api/merch/request", content, token);
             var body = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<MerchendiseInfoResponse>(body);
+            return JsonSerializer.Deserialize<RequestMerchendiseResponse>(body);
         }
     }
 }

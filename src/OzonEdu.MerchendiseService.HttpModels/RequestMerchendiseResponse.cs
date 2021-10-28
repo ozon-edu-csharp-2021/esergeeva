@@ -1,6 +1,6 @@
 ﻿namespace OzonEdu.MerchendiseService.HttpModels
 {
-    public record MerchendiseRequest
+    public record RequestMerchendiseResponse
     {
     }
 }

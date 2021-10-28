@@ -6,7 +6,7 @@ namespace OzonEdu.MerchendiseService.HttpClients
 {
     public interface IMerchendiseServiceHttpClient
     {
-        Task<MerchendiseInfoResponse?> V1GetAllMerchendise(long employeeId, CancellationToken token);
-        Task<MerchendiseInfoResponse?> V1RequestMerchendise(MerchendiseRequest merchendiseRequest, CancellationToken token);
+        Task<GetAllMerchendiseResponse?> V1GetAllMerchendise(long employeeId, CancellationToken token);
+        Task<RequestMerchendiseResponse?> V1RequestMerchendise(RequestMerchendiseRequest merchendiseRequest, CancellationToken token);
     }
 }

@@ -8,6 +8,7 @@ service MerchendiseServiceGrpc {
 }
 
 message GetAllMerchendiseRequest {
+  int64 employee_id = 1;
 }
 
 message GetAllMerchendiseResponse {

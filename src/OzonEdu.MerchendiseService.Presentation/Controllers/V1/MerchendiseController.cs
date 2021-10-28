@@ -8,16 +8,16 @@ namespace OzonEdu.MerchendiseService.Presentation.Controllers.V1
     [Produces("application/json")]
     public class MerchendiseController : ControllerBase
     {
-        [HttpGet("get-all", Name = nameof(GetRequestedMerchendise))]
-        public ActionResult<MerchendiseInfoResponse> GetRequestedMerchendise(long employeeId)
+        [HttpGet("get-all", Name = nameof(GetAllMerchendise))]
+        public ActionResult<GetAllMerchendiseResponse> GetAllMerchendise(long employeeId)
         {
-            return Ok(new MerchendiseInfoResponse());
+            return Ok(new GetAllMerchendiseResponse());
         }
 
         [HttpPost("request", Name = nameof(RequestMerchendise))]
-        public ActionResult<MerchendiseInfoResponse> RequestMerchendise([FromBody] MerchendiseRequest merchendiseRequest)
+        public ActionResult<RequestMerchendiseResponse> RequestMerchendise([FromBody] RequestMerchendiseRequest merchendiseRequest)
         {
-            return Ok(new MerchendiseInfoResponse());
+            return Ok(new RequestMerchendiseResponse());
         }
     }
 }
