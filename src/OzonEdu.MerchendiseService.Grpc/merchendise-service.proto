@@ -1,0 +1,21 @@
+syntax = "proto3";
+option csharp_namespace = "OzonEdu.MerchendiseService.Grpc";
+package MerchendiseService;
+
+service MerchendiseServiceGrpc {
+  rpc GetAllMerchendise (GetAllMerchendiseRequest) returns (GetAllMerchendiseResponse);
+  rpc RequestMerchendise (RequestMerchendiseRequest) returns (RequestMerchendiseResponse);
+}
+
+message GetAllMerchendiseRequest {
+  int64 employee_id = 1;
+}
+
+message GetAllMerchendiseResponse {
+}
+
+message RequestMerchendiseRequest {
+}
+
+message RequestMerchendiseResponse {
+}
