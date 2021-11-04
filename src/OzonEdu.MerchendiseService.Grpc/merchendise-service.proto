@@ -12,10 +12,33 @@ message GetAllMerchendiseRequest {
 }
 
 message GetAllMerchendiseResponse {
+  repeated MerchendiseRequestInfo merchendise_requests = 1;
 }
 
 message RequestMerchendiseRequest {
+  int64 employee_id = 1;
+  MerchendisePackType merchendise_pack_type = 2;
 }
 
 message RequestMerchendiseResponse {
+  MerchendiseRequestInfo merchendise_request_info = 1;
+}
+
+message MerchendiseRequestInfo {
+  enum RequestStatus {
+    IN_PROGRESS = 0;
+    QUEUED = 1;
+    DONE = 2;
+  }
+  int64 request_id = 1;
+  MerchendisePackType merchendise_pack_type = 2;
+  RequestStatus request_status = 3;
+}
+
+enum MerchendisePackType {
+  WELCOME_PACK = 0;
+  CONFERENCE_LISTENER_PACK = 1;
+  CONFERENCE_SPEAKER_PACK = 2;
+  PROBATION_PERIOD_ENDING_PACK = 3;
+  VETERAN_PACK = 4;
 }

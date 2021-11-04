@@ -37,7 +37,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
                 throw new Exception($"Employee with ${request.EmployeeId} not found");
 
             var employeeId = new EmployeeId(request.EmployeeId);
-            MerchendisePackType requestedPackType = request.MerchendisePackType.Convert();
+            MerchendisePackType requestedPackType = request.MerchendisePackType.ConvertToDomain();
             if (!await ValidateMerchendiseType(requestedPackType, employeeId, cancellationToken))
                 throw new Exception($"Merchendise with type {request.MerchendisePackType} cannot be requested twice");
 

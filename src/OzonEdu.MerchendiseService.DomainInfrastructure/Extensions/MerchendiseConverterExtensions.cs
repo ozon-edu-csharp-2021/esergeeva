@@ -23,7 +23,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Extensions
             };
         }
 
-        public static MerchendisePackType Convert(this MerchType merchType)
+        public static MerchendisePackType ConvertToDomain(this MerchType merchType)
         {
             return merchType switch
             {

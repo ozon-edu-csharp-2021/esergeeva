@@ -2,9 +2,10 @@
 
 namespace OzonEdu.MerchendiseService.HttpModels
 {
-    public record RequestMerchendiseRequest
+    public class MerchendiseRequestInfo
     {
-        public long EmployeeId { get; init; }
+        public long RequestId { get; init; }
         public MerchType MerchendisePackType { get; init; }
+        public RequestStatus RequestStatus { get; init; }
     }
 }
