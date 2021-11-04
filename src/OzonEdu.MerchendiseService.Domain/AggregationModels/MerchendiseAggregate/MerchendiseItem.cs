@@ -25,7 +25,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
         
         public override string ToString()
         {
-            return $"MerchendiseItem[${ItemType}, ${Sku}, ${Quantity}]";
+            return $"MerchendiseItem[{ItemType}, {Sku}, {Quantity}]";
         }
     }
 }

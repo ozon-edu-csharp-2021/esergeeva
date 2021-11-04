@@ -19,7 +19,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects
 
         public override string ToString()
         {
-            return $"EmployeeId(${Value})";
+            return $"EmployeeId({Value})";
         }
     }
 }

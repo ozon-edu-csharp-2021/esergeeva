@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Contracts;
+using OzonEdu.MerchendiseService.Domain.Exceptions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
@@ -19,7 +20,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
             CancellationToken cancellationToken = default)
         {
             long newId = _merchendiseRequests.Count + 1;
-            itemToCreate.SetRequestId(newId);
+            itemToCreate.SetRequestId(new MerchendiseRequestId(newId));
             _merchendiseRequests.Add(newId, itemToCreate);
             return Task.FromResult(itemToCreate);
         }
@@ -28,7 +29,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
             CancellationToken cancellationToken = default)
         {
             if (!_merchendiseRequests.ContainsKey(itemToUpdate.RequestId.Value))
-                throw new Exception($"Merchendise request with ${itemToUpdate.RequestId} doesn't exist");
+                throw new NotFoundException($"Merchendise request with {itemToUpdate.RequestId} doesn't exist",
+                    nameof(MerchendiseRequest));
 
             _merchendiseRequests[itemToUpdate.EmployeeId.Value] = itemToUpdate;
             return Task.FromResult(itemToUpdate);
@@ -55,7 +57,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
         public Task DeleteAsync(MerchendiseRequest merchendiseRequest, CancellationToken cancellationToken = default)
         {
             if (!_merchendiseRequests.ContainsKey(merchendiseRequest.RequestId.Value))
-                throw new Exception($"Merchendise request with ${merchendiseRequest.RequestId} doesn't exist");
+                throw new NotFoundException($"Merchendise request with {merchendiseRequest.RequestId} doesn't exist",
+                    nameof(MerchendiseRequest));
 
             _merchendiseRequests.Remove(merchendiseRequest.RequestId.Value);
             return Task.CompletedTask;

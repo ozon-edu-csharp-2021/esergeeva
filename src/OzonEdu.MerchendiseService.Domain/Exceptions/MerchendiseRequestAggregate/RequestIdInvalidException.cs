@@ -2,7 +2,7 @@
 
 namespace OzonEdu.MerchendiseService.Domain.Exceptions.MerchendiseRequestAggregate
 {
-    public class RequestIdInvalidException : Exception
+    public class RequestIdInvalidException : ArgumentException
     {
         public RequestIdInvalidException(string message) : base(message)
         {

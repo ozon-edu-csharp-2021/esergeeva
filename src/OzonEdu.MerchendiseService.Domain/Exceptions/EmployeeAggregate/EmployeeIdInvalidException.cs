@@ -2,7 +2,7 @@
 
 namespace OzonEdu.MerchendiseService.Domain.Exceptions.EmployeeAggregate
 {
-    public class EmployeeIdInvalidException : Exception
+    public class EmployeeIdInvalidException : ArgumentException
     {
         public EmployeeIdInvalidException(string message) : base(message)
         {

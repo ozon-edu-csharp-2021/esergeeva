@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Contracts;
+using OzonEdu.MerchendiseService.Domain.Exceptions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
@@ -24,7 +25,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
         public Task<Employee> CreateAsync(Employee itemToCreate, CancellationToken cancellationToken = default)
         {
             if (_employees.ContainsKey(itemToCreate.EmployeeId.Value))
-                throw new Exception($"Employee with ${itemToCreate.EmployeeId} already exists");
+                throw new ConflictException($"Employee with {itemToCreate.EmployeeId} already exists",
+                    nameof(Employee));
             
             _employees.Add(itemToCreate.EmployeeId.Value, itemToCreate);
             return Task.FromResult(itemToCreate);
@@ -33,7 +35,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
         public Task<Employee> UpdateAsync(Employee itemToUpdate, CancellationToken cancellationToken = default)
         {
             if (!_employees.ContainsKey(itemToUpdate.EmployeeId.Value))
-                throw new Exception($"Employee with ${itemToUpdate.EmployeeId} doesn't exist");
+                throw new NotFoundException($"Employee with {itemToUpdate.EmployeeId} doesn't exist",
+                    nameof(Employee));
 
             _employees[itemToUpdate.EmployeeId.Value] = itemToUpdate;
             return Task.FromResult(itemToUpdate);
@@ -52,7 +55,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
         public Task DeleteByIdAsync(long id, CancellationToken cancellationToken = default)
         {
             if (!_employees.ContainsKey(id))
-                throw new Exception($"Employee with id ${id} doesn't exist");
+                throw new NotFoundException($"Employee with id {id} doesn't exist", nameof(Employee));
 
             _employees.Remove(id);
             return Task.CompletedTask;

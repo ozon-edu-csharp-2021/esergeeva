@@ -19,7 +19,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
         
         public override string ToString()
         {
-            return $"Quantity(${Value})";
+            return $"Quantity({Value})";
         }
     }
 }

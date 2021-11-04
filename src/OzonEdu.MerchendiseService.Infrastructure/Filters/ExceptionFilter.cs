@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using OzonEdu.MerchendiseService.Domain.Exceptions;
 using OzonEdu.MerchendiseService.Infrastructure.Filters.Models;
 
 namespace OzonEdu.MerchendiseService.Infrastructure.Filters
@@ -18,7 +21,18 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Filters
 
             context.Result = new JsonResult(exceptionInfo)
             {
-                StatusCode = StatusCodes.Status500InternalServerError
+                StatusCode = ResolveStatusCode(context.Exception)
+            };
+        }
+
+        private static int ResolveStatusCode(Exception exception)
+        {
+            return exception switch
+            {
+                NotFoundException => StatusCodes.Status404NotFound,
+                ConflictException => StatusCodes.Status409Conflict,
+                ArgumentException => StatusCodes.Status400BadRequest,
+                _ => StatusCodes.Status500InternalServerError
             };
         }
     }

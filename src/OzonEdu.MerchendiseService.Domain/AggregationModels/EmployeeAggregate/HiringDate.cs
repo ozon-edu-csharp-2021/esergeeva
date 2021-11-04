@@ -20,7 +20,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate
         
         public override string ToString()
         {
-            return $"HiringDate(${Value})";
+            return $"HiringDate({Value})";
         }
     }
 }
