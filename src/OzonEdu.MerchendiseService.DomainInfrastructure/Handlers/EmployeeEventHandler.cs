@@ -11,7 +11,7 @@ using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.RequestMerchendis
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 {
-    public class EmployeeEventHandler : IRequestHandler<EmployeeEventCommand>
+    internal class EmployeeEventHandler : IRequestHandler<EmployeeEventCommand>
     {
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
         private readonly IEmployeeRepository _employeeRepository;

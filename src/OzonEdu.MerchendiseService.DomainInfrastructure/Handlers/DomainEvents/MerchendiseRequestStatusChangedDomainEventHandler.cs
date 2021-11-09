@@ -5,7 +5,7 @@ using OzonEdu.MerchendiseService.Domain.Events;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers.DomainEvents
 {
-    class MerchendiseRequestStatusChangedDomainEventHandler :
+    internal class MerchendiseRequestStatusChangedDomainEventHandler :
         INotificationHandler<MerchendiseRequestStatusChangedDomainEvent>
     {
         public Task Handle(MerchendiseRequestStatusChangedDomainEvent notification, CancellationToken cancellationToken)

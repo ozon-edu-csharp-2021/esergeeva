@@ -7,7 +7,7 @@ using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.OuterCommands;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 {
-    public class SupplyShippedEventHandler : IRequestHandler<SupplyShippedEventCommand>
+    internal class SupplyShippedEventHandler : IRequestHandler<SupplyShippedEventCommand>
     {
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
 
