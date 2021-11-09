@@ -4,6 +4,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequest
 {
     public sealed class MerchendiseRequestStatus: Enumeration
     {
+        public static MerchendiseRequestStatus Unknown = new(0, nameof(InProgress));
         public static MerchendiseRequestStatus InProgress = new(1, nameof(InProgress));
         public static MerchendiseRequestStatus Queued = new(2, nameof(Queued));
         public static MerchendiseRequestStatus Done = new(3, nameof(Done));

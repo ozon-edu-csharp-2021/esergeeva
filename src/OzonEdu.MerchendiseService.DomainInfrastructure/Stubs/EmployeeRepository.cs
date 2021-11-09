@@ -9,7 +9,7 @@ using OzonEdu.MerchendiseService.Domain.Exceptions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
-    internal class EmployeeRepository: IEmployeeRepository
+    internal class EmployeeRepository : IEmployeeRepository
     {
         public IUnitOfWork UnitOfWork { get; } = new UnitOfWork();
 
@@ -27,7 +27,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
             if (_employees.ContainsKey(itemToCreate.EmployeeId.Value))
                 throw new ConflictException($"Employee with {itemToCreate.EmployeeId} already exists",
                     nameof(Employee));
-            
+
             _employees.Add(itemToCreate.EmployeeId.Value, itemToCreate);
             return Task.FromResult(itemToCreate);
         }
@@ -45,6 +45,13 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
         public Task<Employee> FindByIdAsync(long id, CancellationToken cancellationToken = default)
         {
             return Task.FromResult(_employees.GetValueOrDefault(id, null));
+        }
+
+        public Task<Employee> GetByIdAsync(long id, CancellationToken cancellationToken = default)
+        {
+            if (!_employees.ContainsKey(id))
+                throw new NotFoundException($"Employee with id {id} not found", nameof(Employee));
+            return Task.FromResult(_employees[id]);
         }
 
         public Task<Employee> FindByEmployeeIdAsync(EmployeeId id, CancellationToken cancellationToken = default)

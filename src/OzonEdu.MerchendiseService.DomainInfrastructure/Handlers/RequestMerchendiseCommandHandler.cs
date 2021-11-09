@@ -33,22 +33,14 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
         public async Task<RequestMerchendiseResponse> Handle(RequestMerchendiseCommand request,
             CancellationToken cancellationToken)
         {
-            var employee = await _employeeRepository.FindByIdAsync(request.EmployeeId, cancellationToken);
-            if (employee is null)
-                throw new NotFoundException($"Employee with id {request.EmployeeId} not found",
-                    nameof(Employee));
+            var employee = await _employeeRepository.GetByIdAsync(request.EmployeeId, cancellationToken);
 
             var employeeId = new EmployeeId(request.EmployeeId);
             MerchendisePackType requestedPackType = request.MerchendisePackType.ConvertToDomain();
-            if (!await ValidateMerchendiseType(requestedPackType, employeeId, cancellationToken))
-                throw new ConflictException($"Merchendise with type {request.MerchendisePackType} cannot be requested twice",
-                    nameof(MerchendisePackType));
+            await ValidateMerchendiseType(requestedPackType, employeeId, cancellationToken);
 
             var merchendisePack =
-                await _merchendisePackRepository.FindByPackTypeAsync(requestedPackType, cancellationToken);
-            if (merchendisePack is null)
-                throw new NotFoundException($"Merchendise pack hasn't been found for type {requestedPackType}",
-                    nameof(MerchendisePackType));
+                await _merchendisePackRepository.GetByPackTypeAsync(requestedPackType, cancellationToken);
 
             // TODO Request merchendise pack from stock-api
 
@@ -67,17 +59,19 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
             };
         }
 
-        private async Task<bool> ValidateMerchendiseType(MerchendisePackType packType, EmployeeId employeeId,
+        private async Task ValidateMerchendiseType(MerchendisePackType packType, EmployeeId employeeId,
             CancellationToken cancellationToken)
         {
             if (packType == MerchendisePackType.ConferenceListenerPack ||
                 packType == MerchendisePackType.ConferenceSpeakerPack)
-                return true;
+                return;
 
             var employeeRequests =
                 await _merchendiseRequestRepository.FindAllByEmployeeIdAsync(employeeId, cancellationToken);
 
-            return employeeRequests.All(merchendiseRequest => merchendiseRequest.MerchendisePackType != packType);
+            if (employeeRequests.Any(merchendiseRequest => merchendiseRequest.MerchendisePackType == packType))
+                throw new ConflictException($"Merchendise with type {packType} cannot be requested twice",
+                    nameof(MerchendisePackType));
         }
     }
 }

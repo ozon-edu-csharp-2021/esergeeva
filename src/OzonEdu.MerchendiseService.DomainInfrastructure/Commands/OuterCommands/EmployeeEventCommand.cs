@@ -1,7 +1,7 @@
 ﻿using CSharpCourse.Core.Lib.Enums;
 using MediatR;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Commands.KafkaEvents
+namespace OzonEdu.MerchendiseService.DomainInfrastructure.Commands.OuterCommands
 {
     public sealed class EmployeeEventCommand: IRequest
     {

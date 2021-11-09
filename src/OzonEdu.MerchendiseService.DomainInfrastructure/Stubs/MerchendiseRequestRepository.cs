@@ -55,6 +55,13 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
                 .Where(request => request.EmployeeId == employeeId).ToList());
         }
 
+        public Task<List<MerchendiseRequest>> FindAllByStatus(MerchendiseRequestStatus status,
+            CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(_merchendiseRequests.Values.Where(request => request.RequestStatus == status)
+                .ToList());
+        }
+
         public Task DeleteAsync(MerchendiseRequest merchendiseRequest, CancellationToken cancellationToken = default)
         {
             if (!_merchendiseRequests.ContainsKey(merchendiseRequest.RequestId.Value))

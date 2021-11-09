@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Contracts;
+using OzonEdu.MerchendiseService.Domain.Exceptions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
@@ -75,6 +76,15 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
             CancellationToken cancellationToken = default)
         {
             throw new NotSupportedException();
+        }
+
+        public Task<MerchendisePack> GetByPackTypeAsync(MerchendisePackType packType,
+            CancellationToken cancellationToken = default)
+        {
+            if (!MerchendisePacks.ContainsKey(packType))
+                throw new NotFoundException($"Merchendise pack hasn't been found for type {packType}",
+                    nameof(MerchendisePackType));
+            return Task.FromResult(MerchendisePacks[packType]);
         }
 
         public Task<MerchendisePack> FindByPackTypeAsync(MerchendisePackType packType,

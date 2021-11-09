@@ -7,21 +7,27 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
 {
     public sealed class MerchendisePack : Entity
     {
-        public MerchendisePackType PackType { get; }
+        public MerchendisePackType PackType { get; private set; }
         public IReadOnlyCollection<MerchendiseItem> Items { get; private set; }
 
         public MerchendisePack(MerchendisePackType packType, IReadOnlyCollection<MerchendiseItem> items)
         {
-            PackType = packType;
+            SetPackType(packType);
             SetItems(items);
         }
 
         private void SetItems(IReadOnlyCollection<MerchendiseItem> items)
         {
-            if (items.Count == 0)
-                throw new MerchendisePackInvalidItemsException("Items list shouldn't be empty");
+            if (items is null || items.Count == 0)
+                throw new MerchendisePackInvalidItemsException("Items list cannot be empty");
 
             Items = items;
+        }
+
+        private void SetPackType(MerchendisePackType packType)
+        {
+            PackType = packType ??
+                       throw new MerchendisePackTypeInvalidException("Merchendise pack type cannot be null");
         }
     }
 }

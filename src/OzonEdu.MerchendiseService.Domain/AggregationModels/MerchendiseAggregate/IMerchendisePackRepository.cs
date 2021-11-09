@@ -7,6 +7,10 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
 {
     public interface IMerchendisePackRepository : IRepository<MerchendisePack>
     {
-        Task<MerchendisePack> FindByPackTypeAsync(MerchendisePackType packType, CancellationToken cancellationToken = default);
+        Task<MerchendisePack> GetByPackTypeAsync(MerchendisePackType packType,
+            CancellationToken cancellationToken = default);
+
+        Task<MerchendisePack> FindByPackTypeAsync(MerchendisePackType packType,
+            CancellationToken cancellationToken = default);
     }
 }
