@@ -31,5 +31,25 @@ namespace OzonEdu.MerchendiseService.Domain.Tests
 
             Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(merchendisePackType, items));
         }
+        
+        [Fact]
+        public void CreateMerchendisePackWithNullItemsFail()
+        {
+            var merchendisePackType = MerchendisePackType.VeteranPack;
+
+            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(merchendisePackType, null));
+        }
+        
+        [Fact]
+        public void CreateMerchendisePackWithNullPackTypeFail()
+        {
+            var items = new List<MerchendiseItem>
+            {
+                new MerchendiseItem(ItemType.Cup, new Sku(1), new Quantity(1)),
+                new MerchendiseItem(ItemType.Socks, new Sku(1), new Quantity(2)),
+            };
+
+            Assert.Throws<MerchendisePackTypeInvalidException>(() => new MerchendisePack(null, items));
+        }
     }
 }

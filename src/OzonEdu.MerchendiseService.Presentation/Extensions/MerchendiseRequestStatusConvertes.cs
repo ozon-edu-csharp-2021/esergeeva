@@ -11,6 +11,7 @@ namespace OzonEdu.MerchendiseService.Presentation.Extensions
         {
             return status switch
             {
+                GrpcRequestStatus.Unknown => DomainRequestStatus.Unknown,
                 GrpcRequestStatus.InProgress => DomainRequestStatus.InProgress,
                 GrpcRequestStatus.Queued => DomainRequestStatus.Queued,
                 GrpcRequestStatus.Done => DomainRequestStatus.Done,
@@ -22,6 +23,7 @@ namespace OzonEdu.MerchendiseService.Presentation.Extensions
         {
             return status switch
             {
+                HttpRequestStatus.Unknown => DomainRequestStatus.Unknown,
                 HttpRequestStatus.InProgress => DomainRequestStatus.InProgress,
                 HttpRequestStatus.Queued => DomainRequestStatus.Queued,
                 HttpRequestStatus.Done => DomainRequestStatus.Done,
@@ -33,6 +35,7 @@ namespace OzonEdu.MerchendiseService.Presentation.Extensions
         {
             return status switch
             {
+                _ when status == DomainRequestStatus.Unknown => HttpRequestStatus.Unknown,
                 _ when status == DomainRequestStatus.InProgress => HttpRequestStatus.InProgress,
                 _ when status == DomainRequestStatus.Queued => HttpRequestStatus.Queued,
                 _ when status == DomainRequestStatus.Done => HttpRequestStatus.Done,
@@ -44,6 +47,7 @@ namespace OzonEdu.MerchendiseService.Presentation.Extensions
         {
             return status switch
             {
+                _ when status == DomainRequestStatus.Unknown => GrpcRequestStatus.Unknown,
                 _ when status == DomainRequestStatus.InProgress => GrpcRequestStatus.InProgress,
                 _ when status == DomainRequestStatus.Queued => GrpcRequestStatus.Queued,
                 _ when status == DomainRequestStatus.Done => GrpcRequestStatus.Done,

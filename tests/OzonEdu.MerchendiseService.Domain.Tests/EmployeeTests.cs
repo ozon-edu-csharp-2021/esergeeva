@@ -29,5 +29,21 @@ namespace OzonEdu.MerchendiseService.Domain.Tests
             Assert.Throws<EmployeeIdInvalidException>(() =>
                 new Employee(new EmployeeId(employeeId), new HiringDate(hiringDate)));
         }
+
+        [Fact]
+        public void CreateEmployeeWithNullIdFail()
+        {
+            var hiringDate = new DateTime(2020, 02, 02);
+
+            Assert.Throws<EmployeeIdInvalidException>(() => new Employee(null, new HiringDate(hiringDate)));
+        }
+
+        [Fact]
+        public void CreateEmployeeWithNullHiringDateFail()
+        {
+            var employeeId = 42;
+
+            Assert.Throws<HiringDateInvalidException>(() => new Employee(new EmployeeId(employeeId), null));
+        }
     }
 }

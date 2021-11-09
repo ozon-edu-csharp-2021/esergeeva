@@ -26,9 +26,10 @@ message RequestMerchendiseResponse {
 
 message MerchendiseRequestInfo {
   enum RequestStatus {
-    IN_PROGRESS = 0;
-    QUEUED = 1;
-    DONE = 2;
+    UNKNOWN = 0;
+    IN_PROGRESS = 1;
+    QUEUED = 2;
+    DONE = 3;
   }
   int64 request_id = 1;
   MerchendisePackType merchendise_pack_type = 2;
@@ -36,9 +37,10 @@ message MerchendiseRequestInfo {
 }
 
 enum MerchendisePackType {
-  WELCOME_PACK = 0;
-  CONFERENCE_LISTENER_PACK = 1;
-  CONFERENCE_SPEAKER_PACK = 2;
-  PROBATION_PERIOD_ENDING_PACK = 3;
-  VETERAN_PACK = 4;
+  UNKNOWN = 0;
+  WELCOME_PACK = 1;
+  CONFERENCE_LISTENER_PACK = 2;
+  CONFERENCE_SPEAKER_PACK = 3;
+  PROBATION_PERIOD_ENDING_PACK = 4;
+  VETERAN_PACK = 5;
 }

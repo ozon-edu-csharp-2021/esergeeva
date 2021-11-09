@@ -42,6 +42,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Extensions
         {
             return status switch
             {
+                _ when status == MerchendiseRequestStatus.Unknown => RequestStatus.Unknown,
                 _ when status == MerchendiseRequestStatus.InProgress => RequestStatus.InProgress,
                 _ when status == MerchendiseRequestStatus.Queued => RequestStatus.Queued,
                 _ when status == MerchendiseRequestStatus.Done => RequestStatus.Done,
@@ -54,6 +55,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Extensions
         {
             return status switch
             {
+                RequestStatus.Unknown => MerchendiseRequestStatus.Unknown,
                 RequestStatus.InProgress => MerchendiseRequestStatus.InProgress,
                 RequestStatus.Queued => MerchendiseRequestStatus.Queued,
                 RequestStatus.Done => MerchendiseRequestStatus.Done,
