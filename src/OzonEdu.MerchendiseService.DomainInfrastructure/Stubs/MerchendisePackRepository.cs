@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
-using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Contracts;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
-    public class MerchendisePackRepository : IMerchendisePackRepository
+    internal class MerchendisePackRepository : IMerchendisePackRepository
     {
         public IUnitOfWork UnitOfWork { get; } = new UnitOfWork();
 

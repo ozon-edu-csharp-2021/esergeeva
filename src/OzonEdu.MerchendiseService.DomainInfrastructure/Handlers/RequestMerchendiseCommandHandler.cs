@@ -3,9 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
-using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.Models;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.RequestMerchendise;
@@ -13,14 +14,14 @@ using OzonEdu.MerchendiseService.DomainInfrastructure.Extensions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 {
-    public class RequestMerchendiseCommandHandler :
+    internal class RequestMerchendiseCommandHandler :
         IRequestHandler<RequestMerchendiseCommand, RequestMerchendiseResponse>
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
         private readonly IMerchendisePackRepository _merchendisePackRepository;
 
-        public RequestMerchendiseCommandHandler(IEmployeeRepository employeeRepository,
+        internal RequestMerchendiseCommandHandler(IEmployeeRepository employeeRepository,
             IMerchendiseRequestRepository merchendiseRequestRepository,
             IMerchendisePackRepository merchendisePackRepository)
         {

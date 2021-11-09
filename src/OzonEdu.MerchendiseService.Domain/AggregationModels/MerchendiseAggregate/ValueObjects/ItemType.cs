@@ -1,8 +1,8 @@
 ﻿using OzonEdu.MerchendiseService.Domain.Models;
 
-namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate
+namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects
 {
-    public class ItemType : Enumeration
+    public sealed class ItemType : Enumeration
     {
         public static readonly ItemType TShirt = new(1, nameof(TShirt));
         public static readonly ItemType SweatShirt = new(2, nameof(SweatShirt));

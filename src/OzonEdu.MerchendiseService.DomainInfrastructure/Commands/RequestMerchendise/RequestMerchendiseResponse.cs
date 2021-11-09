@@ -2,7 +2,7 @@
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Commands.RequestMerchendise
 {
-    public class RequestMerchendiseResponse
+    public sealed class RequestMerchendiseResponse
     {
         public MerchendiseRequestInfo MerchendiseRequestInfo { get; init; }
     }

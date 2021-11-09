@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
-using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Exceptions.MerchendisePackAggregate;
 using Xunit;
 

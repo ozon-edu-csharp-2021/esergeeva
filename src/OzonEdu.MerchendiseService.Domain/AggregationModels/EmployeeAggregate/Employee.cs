@@ -1,10 +1,10 @@
-﻿using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+﻿using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Exceptions.EmployeeAggregate;
 using OzonEdu.MerchendiseService.Domain.Models;
 
 namespace OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate
 {
-    public class Employee: Entity
+    public sealed class Employee: Entity
     {
         public EmployeeId EmployeeId { get; private set; }
         

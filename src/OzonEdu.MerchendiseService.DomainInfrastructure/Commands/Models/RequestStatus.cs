@@ -2,6 +2,7 @@
 {
     public enum RequestStatus
     {
+        Unknown,
         InProgress,
         Queued,
         Done

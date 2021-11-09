@@ -1,12 +1,13 @@
 ﻿using System;
 using CSharpCourse.Core.Lib.Enums;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
-using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.Models;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Extensions
 {
-    public static class MerchendiseConverterExtensions
+    internal static class MerchendiseConverterExtensions
     {
         public static MerchType Convert(this MerchendisePackType merchType)
         {

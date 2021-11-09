@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
-using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Events;
 using OzonEdu.MerchendiseService.Domain.Exceptions.MerchendiseRequestAggregate;
 using Xunit;

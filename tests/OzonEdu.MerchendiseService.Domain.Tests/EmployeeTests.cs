@@ -1,6 +1,6 @@
 ﻿using System;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Exceptions.EmployeeAggregate;
 using Xunit;
 

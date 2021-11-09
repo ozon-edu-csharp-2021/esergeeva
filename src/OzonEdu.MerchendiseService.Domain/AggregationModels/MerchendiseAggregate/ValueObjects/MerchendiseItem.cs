@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using OzonEdu.MerchendiseService.Domain.Models;
 
-namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate
+namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects
 {
-    public class MerchendiseItem: ValueObject
+    public sealed class MerchendiseItem: ValueObject
     {
         public ItemType ItemType { get; }
         public Sku Sku { get; }

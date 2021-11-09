@@ -4,7 +4,7 @@ using GrpcMerchendisePackType = OzonEdu.MerchendiseService.Grpc.MerchendisePackT
 
 namespace OzonEdu.MerchendiseService.Presentation.Extensions
 {
-    public static class MerchendisePackTypeConverters
+    internal static class MerchendisePackTypeConverters
     {
         public static CommonMerchendisePackType Convert(this GrpcMerchendisePackType packType)
         {

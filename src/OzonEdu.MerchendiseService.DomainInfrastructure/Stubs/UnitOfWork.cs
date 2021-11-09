@@ -4,7 +4,7 @@ using OzonEdu.MerchendiseService.Domain.Contracts;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
-    public class UnitOfWork: IUnitOfWork
+    internal class UnitOfWork: IUnitOfWork
     {
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

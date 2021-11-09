@@ -2,7 +2,7 @@
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Commands.GetAllMerchendise
 {
-    public class GetAllMerchendiseCommand: IRequest<GetAllMerchendiseResponse>
+    public sealed class GetAllMerchendiseCommand: IRequest<GetAllMerchendiseResponse>
     {
         public long EmployeeId { get; init; }
     }

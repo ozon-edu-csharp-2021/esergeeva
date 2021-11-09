@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using OzonEdu.MerchendiseService.Domain.Models;
 
-namespace OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate
+namespace OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects
 {
-    public class HiringDate: ValueObject
+    public sealed class HiringDate: ValueObject
     {
         public DateTime Value { get; }
 

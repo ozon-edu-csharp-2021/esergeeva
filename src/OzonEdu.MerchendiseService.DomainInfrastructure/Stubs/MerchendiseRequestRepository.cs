@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
-using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Contracts;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
-    public class MerchendiseRequestRepository : IMerchendiseRequestRepository
+    internal class MerchendiseRequestRepository : IMerchendiseRequestRepository
     {
         public IUnitOfWork UnitOfWork { get; } = new UnitOfWork();
 

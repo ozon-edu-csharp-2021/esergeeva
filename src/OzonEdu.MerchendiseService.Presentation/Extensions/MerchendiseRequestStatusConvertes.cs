@@ -5,7 +5,7 @@ using HttpRequestStatus = OzonEdu.MerchendiseService.HttpModels.RequestStatus;
 
 namespace OzonEdu.MerchendiseService.Presentation.Extensions
 {
-    public static class MerchendiseConverters
+    internal static class MerchendiseConverters
     {
         public static DomainRequestStatus Convert(this GrpcRequestStatus status)
         {

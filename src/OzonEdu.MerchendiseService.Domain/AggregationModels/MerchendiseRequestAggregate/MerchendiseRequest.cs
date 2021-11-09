@@ -1,11 +1,13 @@
-﻿using OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects;
+﻿using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Events;
 using OzonEdu.MerchendiseService.Domain.Exceptions.MerchendiseRequestAggregate;
 using OzonEdu.MerchendiseService.Domain.Models;
 
 namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate
 {
-    public class MerchendiseRequest : Entity
+    public sealed class MerchendiseRequest : Entity
     {
         public MerchendiseRequestId RequestId { get; private set; }
         public MerchendiseRequestStatus RequestStatus { get; private set; }

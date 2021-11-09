@@ -1,8 +1,8 @@
 ﻿using OzonEdu.MerchendiseService.Domain.Models;
 
-namespace OzonEdu.MerchendiseService.Domain.AggregationModels.ValueObjects
+namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects
 {
-    public class MerchendisePackType: Enumeration
+    public sealed class MerchendisePackType: Enumeration
     {
         public static readonly MerchendisePackType WelcomePack = new(10, nameof(WelcomePack));
         public static readonly MerchendisePackType ConferenceListenerPack = new(20, nameof(ConferenceListenerPack));

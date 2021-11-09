@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using OzonEdu.MerchendiseService.Domain.Models;
 
-namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate
+namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate.ValueObjects
 {
-    public class Sku : ValueObject
+    public sealed class MerchendiseRequestId: ValueObject
     {
         public long Value { get; }
 
-        public Sku(long value)
+        public MerchendiseRequestId(long value)
         {
             Value = value;
         }
@@ -16,10 +16,10 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
         {
             yield return Value;
         }
-        
+
         public override string ToString()
         {
-            return $"Sku({Value})";
+            return $"RequestId({Value})";
         }
     }
 }

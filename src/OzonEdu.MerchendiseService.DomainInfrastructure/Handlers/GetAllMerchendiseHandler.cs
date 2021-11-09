@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -12,12 +11,12 @@ using OzonEdu.MerchendiseService.DomainInfrastructure.Extensions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 {
-    public class GetAllMerchendiseHandler : IRequestHandler<GetAllMerchendiseCommand, GetAllMerchendiseResponse>
+    internal sealed class GetAllMerchendiseHandler : IRequestHandler<GetAllMerchendiseCommand, GetAllMerchendiseResponse>
     {
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
         private readonly IEmployeeRepository _employeeRepository;
 
-        public GetAllMerchendiseHandler(IMerchendiseRequestRepository merchendiseRequestRepository,
+        internal GetAllMerchendiseHandler(IMerchendiseRequestRepository merchendiseRequestRepository,
             IEmployeeRepository employeeRepository)
         {
             _merchendiseRequestRepository = merchendiseRequestRepository;
