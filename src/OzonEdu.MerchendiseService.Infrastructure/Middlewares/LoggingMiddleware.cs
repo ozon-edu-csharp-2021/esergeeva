@@ -103,7 +103,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Middlewares
             };
         }
 
-        private async Task<object?> GetRequestBody(HttpRequest request)
+        private async Task<object> GetRequestBody(HttpRequest request)
         {
             request.EnableBuffering();
             try
@@ -126,7 +126,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Middlewares
             return string.Empty;
         }
 
-        private async Task<object?> GetResponseBody(Stream responseBody)
+        private async Task<object> GetResponseBody(Stream responseBody)
         {
             try
             {
@@ -141,7 +141,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Middlewares
             return string.Empty;
         }
 
-        private static bool TryParseJson(string input, out object? data)
+        private static bool TryParseJson(string input, out object data)
         {
             try
             {

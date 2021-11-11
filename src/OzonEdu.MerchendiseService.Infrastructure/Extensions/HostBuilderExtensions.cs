@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OzonEdu.MerchendiseService.DomainInfrastructure.Extensions;
 using OzonEdu.MerchendiseService.Infrastructure.Filters;
 using OzonEdu.MerchendiseService.Infrastructure.Interceptors;
 using OzonEdu.MerchendiseService.Infrastructure.StartupFilters;
@@ -21,6 +22,8 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Extensions
                 services.AddSingleton<IStartupFilter, SwaggerStartupFilter>();
 
                 services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
+
+                services.AddInfrastructureServices();
 
                 services.AddSwaggerGen(options =>
                 {

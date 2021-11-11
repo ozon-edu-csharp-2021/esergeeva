@@ -2,5 +2,6 @@
 {
     public record RequestMerchendiseResponse
     {
+        public MerchendiseRequestInfo MerchendiseRequestInfo { get; init; }
     }
 }
