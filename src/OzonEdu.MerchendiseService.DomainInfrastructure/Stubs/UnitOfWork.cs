@@ -4,16 +4,20 @@ using OzonEdu.MerchendiseService.Domain.Contracts;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
-    internal class UnitOfWork: IUnitOfWork
+    internal class UnitOfWork : IUnitOfWork
     {
-        public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public ValueTask StartTransaction(CancellationToken token)
         {
-            return Task.FromResult(0);
+            return ValueTask.CompletedTask;
         }
 
-        public Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        public Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(true);
+            return Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
