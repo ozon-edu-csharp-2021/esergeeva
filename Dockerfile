@@ -12,6 +12,7 @@ RUN dotnet build "OzonEdu.MerchendiseService.Presentation.csproj" -c Release -o 
 
 FROM build AS publish
 RUN dotnet publish "OzonEdu.MerchendiseService.Presentation.csproj" -c Release -o /app/publish
+COPY "entrypoint.sh" "/app/publish/."
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
 
@@ -25,4 +26,5 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "OzonEdu.MerchendiseService.Presentation.dll"]
+RUN chmod +x entrypoint.sh
+CMD /bin/bash entrypoint.sh
