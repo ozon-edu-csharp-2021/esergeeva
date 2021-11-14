@@ -16,9 +16,4 @@
       <ProjectReference Include="..\OzonEdu.MerchendiseService.Domain\OzonEdu.MerchendiseService.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Repositories\Implementation" />
-      <Folder Include="Repositories\Models" />
-    </ItemGroup>
-
 </Project>

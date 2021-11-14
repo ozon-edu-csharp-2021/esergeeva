@@ -1,14 +1,13 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using OzonEdu.MerchendiseService.Domain.Models;
 
 namespace OzonEdu.MerchendiseService.Domain.Contracts
 {
-    public interface IRepository<TAggregationRoot>
+    public interface IRepository<TEntity> where TEntity : Entity
     {
-        IUnitOfWork UnitOfWork { get; }
-        
-        Task<TAggregationRoot> CreateAsync(TAggregationRoot itemToCreate, CancellationToken cancellationToken = default);
+        Task<TEntity> CreateAsync(TEntity itemToCreate, CancellationToken cancellationToken = default);
 
-        Task<TAggregationRoot> UpdateAsync(TAggregationRoot itemToUpdate, CancellationToken cancellationToken = default);
+        Task<TEntity> UpdateAsync(TEntity itemToUpdate, CancellationToken cancellationToken = default);
     }
 }
