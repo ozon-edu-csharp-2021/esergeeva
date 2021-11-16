@@ -12,9 +12,10 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            services.AddSingleton<IMerchendisePackRepository, MerchendisePackRepository>();
-            services.AddSingleton<IMerchendiseRequestRepository, MerchendiseRequestRepository>();
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IMerchendisePackRepository, MerchendisePackRepository>();
+            services.AddScoped<IMerchendiseRequestRepository, MerchendiseRequestRepository>();
             services.AddMediatR(typeof(RequestMerchendiseCommand).Assembly);
 
             return services;

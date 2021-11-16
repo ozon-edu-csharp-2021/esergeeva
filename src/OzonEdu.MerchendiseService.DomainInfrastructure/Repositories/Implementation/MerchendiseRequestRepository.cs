@@ -29,13 +29,13 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
             CancellationToken cancellationToken = default)
         {
             const string sql = @"
-                INSERT INTO merchendise_requests (id, employee_id, merchendise_pack_type, status) 
-                VALUES (@RequestId, @EmployeeId, @PackType, @RequestStatus);
+                INSERT INTO merchendise_requests (employee_id, merchendise_pack_type, status) 
+                VALUES (@EmployeeId, @PackType, @RequestStatus)
+                RETURNING id;
             ";
 
             var parameters = new
             {
-                RequestId = itemToCreate.RequestId.Value,
                 EmployeeId = itemToCreate.EmployeeId.Value,
                 PackType = itemToCreate.MerchendisePackType.Id,
                 RequestStatus = itemToCreate.RequestStatus.Id
@@ -43,7 +43,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
             var commandDefinition = new CommandDefinition(sql, parameters,
                 commandTimeout: TimeoutSec, cancellationToken: cancellationToken);
             var connection = await _dbConnectionFactory.CreateConnection(cancellationToken);
-            await connection.ExecuteAsync(commandDefinition);
+            var newId = await connection.ExecuteScalarAsync<long>(commandDefinition);
+            itemToCreate.SetRequestId(new MerchendiseRequestId(newId));
             _changeTracker.Track(itemToCreate);
             return itemToCreate;
         }
@@ -80,7 +81,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
                        merchendise_pack_types.id, merchendise_pack_types.name
                 FROM merchendise_requests
                 INNER JOIN merchendise_pack_types on merchendise_requests.merchendise_pack_type = merchendise_pack_types.id
-                INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.name
+                INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.id
                 WHERE merchendise_requests.id = @RequestId
             ";
             var parameters = new
@@ -121,7 +122,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
                        merchendise_pack_types.id, merchendise_pack_types.name
                 FROM merchendise_requests
                 INNER JOIN merchendise_pack_types on merchendise_requests.merchendise_pack_type = merchendise_pack_types.id
-                INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.name
+                INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.id
                 WHERE merchendise_requests.employee_id = @EmployeeId
             ";
             var parameters = new
@@ -156,7 +157,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
                        merchendise_pack_types.id, merchendise_pack_types.name
                 FROM merchendise_requests
                 INNER JOIN merchendise_pack_types on merchendise_requests.merchendise_pack_type = merchendise_pack_types.id
-                INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.name
+                INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.id
                 WHERE merchendise_requests.status = @RequestStatus
             ";
             var parameters = new

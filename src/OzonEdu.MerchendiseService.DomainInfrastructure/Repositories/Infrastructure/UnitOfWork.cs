@@ -59,15 +59,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastru
             {
                 await _publisher.Publish(notification, cancellationToken);
             }
-        }
-
-        public async ValueTask CommitTransaction(CancellationToken cancellationToken)
-        {
-            if (_npgsqlTransaction is null)
-            {
-                throw new NoActiveTransactionStartedException();
-            }
-
+            
             await _npgsqlTransaction.CommitAsync(cancellationToken);
         }
 

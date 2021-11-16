@@ -15,7 +15,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
         private readonly IEmployeeRepository _employeeRepository;
 
-        internal GetAllMerchendiseHandler(IMerchendiseRequestRepository merchendiseRequestRepository,
+        public GetAllMerchendiseHandler(IMerchendiseRequestRepository merchendiseRequestRepository,
             IEmployeeRepository employeeRepository)
         {
             _merchendiseRequestRepository = merchendiseRequestRepository;

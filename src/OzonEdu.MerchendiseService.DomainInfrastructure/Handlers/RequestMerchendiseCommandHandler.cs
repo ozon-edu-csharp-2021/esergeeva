@@ -23,7 +23,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
         private readonly IMerchendisePackRepository _merchendisePackRepository;
 
-        internal RequestMerchendiseCommandHandler(IUnitOfWork unitOfWork, IEmployeeRepository employeeRepository,
+        public RequestMerchendiseCommandHandler(IUnitOfWork unitOfWork, IEmployeeRepository employeeRepository,
             IMerchendiseRequestRepository merchendiseRequestRepository,
             IMerchendisePackRepository merchendisePackRepository)
         {

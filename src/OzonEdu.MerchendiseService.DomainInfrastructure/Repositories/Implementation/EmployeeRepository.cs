@@ -68,7 +68,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
             const string sql = @"
                 SELECT employees.id, employees.hiring_date
                 FROM employees
-                WHERE employees.id == @EmployeeId;
+                WHERE employees.id = @EmployeeId;
             ";
 
             var parameters = new

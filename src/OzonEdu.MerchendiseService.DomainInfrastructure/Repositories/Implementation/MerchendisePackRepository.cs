@@ -102,9 +102,9 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
                 commandTimeout: TimeoutSec, cancellationToken: cancellationToken);
             var connection = await _dbConnectionFactory.CreateConnection(cancellationToken);
             var merchendisePacks = await connection
-                .QueryAsync<Models.MerchendisePack, Models.MerchendisePackType, int, DomainMerchendisePack>(
+                .QueryAsync<Models.MerchendisePack, Models.MerchendisePackType, DomainMerchendisePack>(
                     commandDefinition,
-                    (merchendisePack, merchendisePackType, skuId) => new DomainMerchendisePack(
+                    (merchendisePack, merchendisePackType) => new DomainMerchendisePack(
                         new MerchendisePackId(merchendisePackType.Id),
                         new MerchendisePackType(merchendisePackType.Id, merchendisePackType.Name),
                         merchendisePack.SkuItems.Select(id => new Sku(id)).ToList()

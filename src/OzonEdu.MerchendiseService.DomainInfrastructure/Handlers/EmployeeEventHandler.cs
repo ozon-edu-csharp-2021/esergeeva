@@ -33,14 +33,10 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
             switch (request.EmployeeEventType)
             {
                 case EmployeeEventType.Hiring:
-                    await _unitOfWork.StartTransaction(cancellationToken);
                     await AddNewEmployee(request.EmployeeId, cancellationToken);
-                    await _unitOfWork.CommitTransaction(cancellationToken);
                     break;
                 case EmployeeEventType.Dismissal:
-                    await _unitOfWork.StartTransaction(cancellationToken);
                     await RemoveEmployee(request.EmployeeId, cancellationToken);
-                    await _unitOfWork.CommitTransaction(cancellationToken);
                     return new Unit();
                 case EmployeeEventType.MerchDelivery:
                     return new Unit();
@@ -52,6 +48,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 
         private async Task AddNewEmployee(long employeeId, CancellationToken cancellationToken)
         {
+            await _unitOfWork.StartTransaction(cancellationToken);
             var newEmployee = new Employee(new EmployeeId(employeeId), new HiringDate(DateTime.Now.ToUniversalTime()));
             await _employeeRepository.CreateAsync(newEmployee, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
@@ -59,6 +56,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 
         private async Task RemoveEmployee(long employeeId, CancellationToken cancellationToken)
         {
+            await _unitOfWork.StartTransaction(cancellationToken);
             await _merchendiseRequestRepository.DeleteAllByEmployeeIdAsync(new EmployeeId(employeeId),
                 cancellationToken);
             await _employeeRepository.DeleteByIdAsync(employeeId, cancellationToken);
