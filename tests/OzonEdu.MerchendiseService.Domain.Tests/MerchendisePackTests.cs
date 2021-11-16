@@ -11,45 +11,74 @@ namespace OzonEdu.MerchendiseService.Domain.Tests
         [Fact]
         public void CreateMerchendisePackSuccess()
         {
+            var packId = new MerchendisePackId(1);
             var merchendisePackType = MerchendisePackType.WelcomePack;
-            var items = new List<MerchendiseItem>
+            var items = new List<Sku>
             {
-                new MerchendiseItem(ItemType.Cup, new Sku(1), new Quantity(1)),
-                new MerchendiseItem(ItemType.Socks, new Sku(1), new Quantity(2)),
+                new Sku(1),
+                new Sku(2)
             };
 
-            var merchendisePack = new MerchendisePack(merchendisePackType, items);
+            var merchendisePack = new MerchendisePack(packId, merchendisePackType, items);
             Assert.Equal(merchendisePackType, merchendisePack.PackType);
-            Assert.Equal(items.Count, merchendisePack.Items.Count);
+            Assert.Equal(items.Count, merchendisePack.SkuItems.Count);
+        }
+        
+        [Fact]
+        public void CreateMerchendisePackWithNullIdFail()
+        {
+            var merchendisePackType = MerchendisePackType.VeteranPack;
+            var items = new List<Sku>
+            {
+                new Sku(1),
+                new Sku(2)
+            };
+            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(null, merchendisePackType, items));
+        }     
+
+        [Fact]
+        public void CreateMerchendisePackWithNegativeIdFail()
+        {
+            var packId = new MerchendisePackId(-1);
+            var merchendisePackType = MerchendisePackType.VeteranPack;
+            var items = new List<Sku>
+            {
+                new Sku(1),
+                new Sku(2)
+            };
+            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(packId, merchendisePackType, items));
         }
 
         [Fact]
         public void CreateMerchendisePackWithEmptyItemsFail()
         {
+            var packId = new MerchendisePackId(1);
             var merchendisePackType = MerchendisePackType.VeteranPack;
-            var items = new List<MerchendiseItem>();
+            var items = new List<Sku>();
 
-            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(merchendisePackType, items));
+            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(packId, merchendisePackType, items));
         }
         
         [Fact]
         public void CreateMerchendisePackWithNullItemsFail()
         {
+            var packId = new MerchendisePackId(1);
             var merchendisePackType = MerchendisePackType.VeteranPack;
 
-            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(merchendisePackType, null));
+            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(packId, merchendisePackType, null));
         }
         
         [Fact]
         public void CreateMerchendisePackWithNullPackTypeFail()
         {
-            var items = new List<MerchendiseItem>
+            var packId = new MerchendisePackId(1);
+            var items = new List<Sku>
             {
-                new MerchendiseItem(ItemType.Cup, new Sku(1), new Quantity(1)),
-                new MerchendiseItem(ItemType.Socks, new Sku(1), new Quantity(2)),
+                new Sku(1),
+                new Sku(2)
             };
 
-            Assert.Throws<MerchendisePackTypeInvalidException>(() => new MerchendisePack(null, items));
+            Assert.Throws<MerchendisePackTypeInvalidException>(() => new MerchendisePack(packId, null, items));
         }
     }
 }

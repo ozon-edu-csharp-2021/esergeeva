@@ -8,20 +8,30 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
     public sealed class MerchendisePack : Entity
     {
         public MerchendisePackType PackType { get; private set; }
-        public IReadOnlyCollection<MerchendiseItem> Items { get; private set; }
+        public IReadOnlyCollection<Sku> SkuItems { get; private set; }
 
-        public MerchendisePack(MerchendisePackType packType, IReadOnlyCollection<MerchendiseItem> items)
+        public MerchendisePack(MerchendisePackId packId, MerchendisePackType packType,
+            IReadOnlyCollection<Sku> items)
         {
+            SetPackId(packId);
             SetPackType(packType);
             SetItems(items);
         }
 
-        private void SetItems(IReadOnlyCollection<MerchendiseItem> items)
+        private void SetPackId(MerchendisePackId packId)
+        {
+            if (packId is null)
+                throw new MerchendisePackIdInvalidException("Merchendise pack id cannot be null");
+            if (packId.Value <= 0)
+                throw new MerchendisePackIdInvalidException("Merchendise pack id must be positive");
+        }
+
+        private void SetItems(IReadOnlyCollection<Sku> items)
         {
             if (items is null || items.Count == 0)
                 throw new MerchendisePackInvalidItemsException("Items list cannot be empty");
 
-            Items = items;
+            SkuItems = items;
         }
 
         private void SetPackType(MerchendisePackType packType)

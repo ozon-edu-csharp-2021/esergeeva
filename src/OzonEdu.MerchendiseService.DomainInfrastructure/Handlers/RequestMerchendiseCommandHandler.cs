@@ -7,6 +7,7 @@ using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.Valu
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
+using OzonEdu.MerchendiseService.Domain.Contracts;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.Models;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.RequestMerchendise;
@@ -17,14 +18,16 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
     internal class RequestMerchendiseCommandHandler :
         IRequestHandler<RequestMerchendiseCommand, RequestMerchendiseResponse>
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
         private readonly IMerchendisePackRepository _merchendisePackRepository;
 
-        internal RequestMerchendiseCommandHandler(IEmployeeRepository employeeRepository,
+        internal RequestMerchendiseCommandHandler(IUnitOfWork unitOfWork, IEmployeeRepository employeeRepository,
             IMerchendiseRequestRepository merchendiseRequestRepository,
             IMerchendisePackRepository merchendisePackRepository)
         {
+            _unitOfWork = unitOfWork;
             _employeeRepository = employeeRepository;
             _merchendiseRequestRepository = merchendiseRequestRepository;
             _merchendisePackRepository = merchendisePackRepository;
@@ -33,6 +36,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
         public async Task<RequestMerchendiseResponse> Handle(RequestMerchendiseCommand request,
             CancellationToken cancellationToken)
         {
+            await _unitOfWork.StartTransaction(cancellationToken);
             var employee = await _employeeRepository.GetByIdAsync(request.EmployeeId, cancellationToken);
 
             var employeeId = new EmployeeId(request.EmployeeId);
@@ -40,14 +44,14 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
             await ValidateMerchendiseType(requestedPackType, employeeId, cancellationToken);
 
             var merchendisePack =
-                await _merchendisePackRepository.GetByPackTypeAsync(requestedPackType, cancellationToken);
+                await _merchendisePackRepository.GetFirstByPackTypeAsync(requestedPackType, cancellationToken);
 
             // TODO Request merchendise pack from stock-api
 
             var result = await _merchendiseRequestRepository.CreateAsync(
                 new MerchendiseRequest(employeeId, requestedPackType),
                 cancellationToken);
-            await _merchendiseRequestRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return new RequestMerchendiseResponse
             {
                 MerchendiseRequestInfo = new MerchendiseRequestInfo

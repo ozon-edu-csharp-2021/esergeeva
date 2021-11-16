@@ -11,8 +11,6 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
     internal class EmployeeRepository : IEmployeeRepository
     {
-        public IUnitOfWork UnitOfWork { get; } = new UnitOfWork();
-
         private readonly Dictionary<long, Employee> _employees = new()
         {
             {1, new Employee(new EmployeeId(1), new HiringDate(new DateTime(2021, 04, 01)))},

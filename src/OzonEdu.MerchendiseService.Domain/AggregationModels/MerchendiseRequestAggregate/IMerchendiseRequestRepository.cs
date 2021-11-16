@@ -17,7 +17,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequest
         Task<IReadOnlyList<MerchendiseRequest>> FindAllByEmployeeIdAsync(EmployeeId employeeId,
             CancellationToken cancellationToken = default);
         
-        Task<List<MerchendiseRequest>> FindAllByStatus(MerchendiseRequestStatus status, CancellationToken cancellationToken = default);
+        Task<List<MerchendiseRequest>> FindAllByStatus(MerchendiseRequestStatus requestStatus, CancellationToken cancellationToken = default);
 
         Task DeleteAsync(MerchendiseRequest merchendiseRequest, CancellationToken cancellationToken = default);
 

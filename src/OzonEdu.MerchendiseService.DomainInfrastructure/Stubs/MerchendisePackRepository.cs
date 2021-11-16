@@ -4,65 +4,57 @@ using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
-using OzonEdu.MerchendiseService.Domain.Contracts;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
     internal class MerchendisePackRepository : IMerchendisePackRepository
     {
-        public IUnitOfWork UnitOfWork { get; } = new UnitOfWork();
-
-        private static readonly Dictionary<ItemType, MerchendiseItem> Items = new()
-        {
-            {ItemType.Pen, new MerchendiseItem(ItemType.Pen, new Sku(1), new Quantity(3))},
-            {ItemType.Notepad, new MerchendiseItem(ItemType.Notepad, new Sku(1), new Quantity(2))},
-            {ItemType.Cup, new MerchendiseItem(ItemType.Cup, new Sku(1), new Quantity(1))},
-            {ItemType.Socks, new MerchendiseItem(ItemType.Socks, new Sku(1), new Quantity(4))},
-            {ItemType.Bag, new MerchendiseItem(ItemType.Bag, new Sku(1), new Quantity(1))},
-            {ItemType.TShirt, new MerchendiseItem(ItemType.TShirt, new Sku(1), new Quantity(2))},
-            {ItemType.SweatShirt, new MerchendiseItem(ItemType.SweatShirt, new Sku(1), new Quantity(1))},
-        };
-
         private static readonly Dictionary<MerchendisePackType, MerchendisePack> MerchendisePacks = new()
         {
             {
                 MerchendisePackType.WelcomePack,
-                new MerchendisePack(MerchendisePackType.WelcomePack, new[]
-                {
-                    Items[ItemType.Pen], Items[ItemType.Notepad]
-                })
+                new MerchendisePack(new MerchendisePackId(MerchendisePackType.WelcomePack.Id),
+                    MerchendisePackType.WelcomePack, new[]
+                    {
+                        new Sku(1), new Sku(2)
+                    })
             },
             {
                 MerchendisePackType.ProbationPeriodEndingPack,
-                new MerchendisePack(MerchendisePackType.WelcomePack, new[]
-                {
-                    Items[ItemType.Cup], Items[ItemType.Socks]
-                })
+                new MerchendisePack(new MerchendisePackId(MerchendisePackType.ProbationPeriodEndingPack.Id),
+                    MerchendisePackType.ProbationPeriodEndingPack, new[]
+                    {
+                        new Sku(3), new Sku(4)
+                    })
             },
             {
                 MerchendisePackType.ConferenceListenerPack,
-                new MerchendisePack(MerchendisePackType.WelcomePack, new[]
-                {
-                    Items[ItemType.Pen], Items[ItemType.Notepad],
-                    Items[ItemType.TShirt], Items[ItemType.Bag]
-                })
+                new MerchendisePack(new MerchendisePackId(MerchendisePackType.ConferenceListenerPack.Id),
+                    MerchendisePackType.ConferenceListenerPack, new[]
+                    {
+                        new Sku(1), new Sku(2),
+                        new Sku(3), new Sku(4)
+                    })
             },
             {
                 MerchendisePackType.ConferenceSpeakerPack,
-                new MerchendisePack(MerchendisePackType.WelcomePack, new[]
-                {
-                    Items[ItemType.Pen], Items[ItemType.Notepad],
-                    Items[ItemType.SweatShirt], Items[ItemType.Bag]
-                })
+                new MerchendisePack(new MerchendisePackId(MerchendisePackType.ConferenceListenerPack.Id),
+                    MerchendisePackType.ConferenceSpeakerPack, new[]
+                    {
+                        new Sku(1), new Sku(2),
+                        new Sku(5), new Sku(6)
+                    })
             },
             {
-                MerchendisePackType.VeteranPack, new MerchendisePack(MerchendisePackType.WelcomePack, new[]
-                {
-                    Items[ItemType.Pen], Items[ItemType.Notepad],
-                    Items[ItemType.Cup], Items[ItemType.Socks],
-                    Items[ItemType.TShirt], Items[ItemType.SweatShirt], Items[ItemType.Bag]
-                })
+                MerchendisePackType.VeteranPack, new MerchendisePack(
+                    new MerchendisePackId(MerchendisePackType.VeteranPack.Id),
+                    MerchendisePackType.VeteranPack, new[]
+                    {
+                        new Sku(1), new Sku(2),
+                        new Sku(3), new Sku(4),
+                        new Sku(5), new Sku(6)
+                    })
             }
         };
 
@@ -78,7 +70,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
             throw new NotSupportedException();
         }
 
-        public Task<MerchendisePack> GetByPackTypeAsync(MerchendisePackType packType,
+        public Task<MerchendisePack> GetFirstByPackTypeAsync(MerchendisePackType packType,
             CancellationToken cancellationToken = default)
         {
             if (!MerchendisePacks.ContainsKey(packType))
@@ -87,7 +79,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
             return Task.FromResult(MerchendisePacks[packType]);
         }
 
-        public Task<MerchendisePack> FindByPackTypeAsync(MerchendisePackType packType,
+        public Task<MerchendisePack> FindFirstByPackTypeAsync(MerchendisePackType packType,
             CancellationToken cancellationToken = default)
         {
             return Task.FromResult(MerchendisePacks.GetValueOrDefault(packType, null));

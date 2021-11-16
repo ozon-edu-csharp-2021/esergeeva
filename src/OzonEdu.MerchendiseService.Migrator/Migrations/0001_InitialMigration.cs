@@ -19,27 +19,12 @@ namespace OzonEdu.MerchendiseService.Migrator.Migrations
                     name TEXT NOT NULL
                 );
             ");
-            
-            Execute.Sql(@"
-                CREATE TABLE sku_types(
-                    id BIGSERIAL PRIMARY KEY,
-                    name TEXT NOT NULL
-                );
-            ");
-            
-            Execute.Sql(@"                
-                CREATE TYPE merchendise_item AS (
-                    sku_type INT,
-                    sku_id INT,
-                    quantity INT
-                );
-            ");
 
             Execute.Sql(@"
                 CREATE TABLE merchendise_packs(
                     id BIGSERIAL PRIMARY KEY,
                     pack_type INT,
-                    merchendise_items merchendise_item[] 
+                    sku_items INT[] 
                 );
             ");
             

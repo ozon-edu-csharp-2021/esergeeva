@@ -18,7 +18,6 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastru
             _options = options.Value;
         }
 
-
         public async Task<NpgsqlConnection> CreateConnection(CancellationToken token)
         {
             if (_connection != null)

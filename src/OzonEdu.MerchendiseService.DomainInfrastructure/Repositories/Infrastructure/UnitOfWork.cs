@@ -14,7 +14,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastru
     public class UnitOfWork : IUnitOfWork
     {
         private NpgsqlTransaction _npgsqlTransaction;
-        
+
         private readonly IDbConnectionFactory<NpgsqlConnection> _dbConnectionFactory = null;
         private readonly IPublisher _publisher;
         private readonly IChangeTracker _changeTracker;
@@ -35,6 +35,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastru
             {
                 return;
             }
+
             var connection = await _dbConnectionFactory.CreateConnection(token);
             _npgsqlTransaction = await connection.BeginTransactionAsync(token);
         }
@@ -57,6 +58,14 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastru
             while (domainEvents.TryDequeue(out var notification))
             {
                 await _publisher.Publish(notification, cancellationToken);
+            }
+        }
+
+        public async ValueTask CommitTransaction(CancellationToken cancellationToken)
+        {
+            if (_npgsqlTransaction is null)
+            {
+                throw new NoActiveTransactionStartedException();
             }
 
             await _npgsqlTransaction.CommitAsync(cancellationToken);

@@ -4,7 +4,7 @@ using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.RequestMerchendise;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Stubs;
+using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implementation;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Extensions
 {

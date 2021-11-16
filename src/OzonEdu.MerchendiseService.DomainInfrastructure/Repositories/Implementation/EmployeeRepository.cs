@@ -1,45 +1,124 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Dapper;
+using Npgsql;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
+using OzonEdu.MerchendiseService.Domain.Exceptions;
+using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces;
 
 namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implementation
 {
-    public class EmployeeRepository: IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
-        public Task<Employee> CreateAsync(Employee itemToCreate, CancellationToken cancellationToken = default)
+        private readonly IDbConnectionFactory<NpgsqlConnection> _dbConnectionFactory;
+        private readonly IChangeTracker _changeTracker;
+        private const int TimeoutSec = 5;
+
+        public EmployeeRepository(IDbConnectionFactory<NpgsqlConnection> dbConnectionFactory,
+            IChangeTracker changeTracker)
         {
-            throw new System.NotImplementedException();
+            _dbConnectionFactory = dbConnectionFactory;
+            _changeTracker = changeTracker;
         }
 
-        public Task<Employee> UpdateAsync(Employee itemToUpdate, CancellationToken cancellationToken = default)
+        public async Task<Employee> CreateAsync(Employee itemToCreate, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            const string sql = @"
+                INSERT INTO employees (id, hiring_date) 
+                VALUES (@EmployeeId, @HiringDate);
+            ";
+
+            var parameters = new
+            {
+                EmployeeId = itemToCreate.EmployeeId.Value,
+                HiringDate = itemToCreate.HiringDate.Value
+            };
+            var commandDefinition = new CommandDefinition(sql, parameters,
+                commandTimeout: TimeoutSec, cancellationToken: cancellationToken);
+            var connection = await _dbConnectionFactory.CreateConnection(cancellationToken);
+            await connection.ExecuteAsync(commandDefinition);
+            _changeTracker.Track(itemToCreate);
+            return itemToCreate;
         }
 
-        public Task<Employee> FindByIdAsync(long id, CancellationToken cancellationToken = default)
+        public async Task<Employee> UpdateAsync(Employee itemToUpdate, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            const string sql = @"
+                UPDATE employees
+                SET hiring_date = @HiringDate
+                WHERE id = @EmployeeId 
+            ";
+
+            var parameters = new
+            {
+                EmployeeId = itemToUpdate.EmployeeId.Value,
+                HiringDate = itemToUpdate.HiringDate.Value
+            };
+            var commandDefinition = new CommandDefinition(sql, parameters,
+                commandTimeout: TimeoutSec, cancellationToken: cancellationToken);
+            var connection = await _dbConnectionFactory.CreateConnection(cancellationToken);
+            await connection.ExecuteAsync(commandDefinition);
+            _changeTracker.Track(itemToUpdate);
+            return itemToUpdate;
         }
 
-        public Task<Employee> GetByIdAsync(long id, CancellationToken cancellationToken = default)
+        public async Task<Employee> FindByIdAsync(long id, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            const string sql = @"
+                SELECT employees.id, employees.hiring_date
+                FROM employees
+                WHERE employees.id == @EmployeeId;
+            ";
+
+            var parameters = new
+            {
+                EmployeeId = id
+            };
+            var commandDefinition = new CommandDefinition(sql, parameters,
+                commandTimeout: TimeoutSec, cancellationToken: cancellationToken);
+            var connection = await _dbConnectionFactory.CreateConnection(cancellationToken);
+            var employee = await connection.QueryFirstOrDefaultAsync<Models.Employee>(commandDefinition);
+            if (employee is null)
+                return null;
+            var result = new Employee(new EmployeeId(employee.Id), new HiringDate(employee.HiringDate));
+            _changeTracker.Track(result);
+            return result;
+        }
+
+        public async Task<Employee> GetByIdAsync(long id, CancellationToken cancellationToken = default)
+        {
+            var employee = await FindByIdAsync(id, cancellationToken);
+            if (employee is null)
+                throw new NotFoundException($"Employee with id {id} not found", nameof(Employee));
+            return employee;
         }
 
         public Task<Employee> FindByEmployeeIdAsync(EmployeeId id, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            return FindByIdAsync(id.Value, cancellationToken);
         }
 
-        public Task DeleteByIdAsync(long id, CancellationToken cancellationToken = default)
+        public async Task DeleteByIdAsync(long id, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            const string sql = @"
+                DELETE FROM employees
+                WHERE id = @EmployeeId
+            ";
+            var parameters = new
+            {
+                EmployeeId = id
+            };
+
+            var commandDefinition = new CommandDefinition(sql, parameters,
+                commandTimeout: TimeoutSec, cancellationToken: cancellationToken);
+            var connection = await _dbConnectionFactory.CreateConnection(cancellationToken);
+            await connection.ExecuteAsync(commandDefinition);
         }
 
         public Task DeleteByIdAsync(EmployeeId id, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            return DeleteByIdAsync(id.Value, cancellationToken);
         }
     }
 }

@@ -13,8 +13,6 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
 {
     internal class MerchendiseRequestRepository : IMerchendiseRequestRepository
     {
-        public IUnitOfWork UnitOfWork { get; } = new UnitOfWork();
-
         private Dictionary<long, MerchendiseRequest> _merchendiseRequests = new();
 
         public Task<MerchendiseRequest> CreateAsync(MerchendiseRequest itemToCreate,
@@ -55,10 +53,10 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
                 .Where(request => request.EmployeeId == employeeId).ToList());
         }
 
-        public Task<List<MerchendiseRequest>> FindAllByStatus(MerchendiseRequestStatus status,
+        public Task<List<MerchendiseRequest>> FindAllByStatus(MerchendiseRequestStatus requestStatus,
             CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(_merchendiseRequests.Values.Where(request => request.RequestStatus == status)
+            return Task.FromResult(_merchendiseRequests.Values.Where(request => request.RequestStatus == requestStatus)
                 .ToList());
         }
 
