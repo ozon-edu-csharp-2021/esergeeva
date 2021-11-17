@@ -7,7 +7,8 @@ services:
       dockerfile: ./Dockerfile
     hostname: merchendise-service
     ports:
-      - "8080:80"
+      - "5070:5000"
+      - "5072:5002"
     environment:
       DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5428;Database=merchendise-service;Username=postgres;Password=merchendiseServicePassword"
     depends_on:
@@ -35,7 +36,7 @@ services:
     ports:
       - "8083:80"
     depends_on:
-      - employees-service-postgres-db
+      - employees-service-db
     volumes:
       - ./src:/src
 

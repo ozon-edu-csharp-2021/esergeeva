@@ -3,7 +3,7 @@ using OzonEdu.MerchendiseService.Domain.Models;
 
 namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects
 {
-    public class MerchendisePackId: ValueObject
+    public sealed class MerchendisePackId: ValueObject
     {
         public long Value { get; }
 
@@ -15,6 +15,11 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
+        }
+
+        public override string ToString()
+        {
+            return $"PackId({Value})";
         }
     }
 }

@@ -41,7 +41,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Extensions
 
             return builder;
         }
-        
+
         public static IHostBuilder ConfigurePorts(this IHostBuilder builder)
         {
             var httpPortEnv = Environment.GetEnvironmentVariable("HTTP_PORT");
@@ -55,6 +55,7 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Extensions
             {
                 grpcPort = 5002;
             }
+
             builder.ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.ConfigureKestrel(
@@ -69,13 +70,11 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Extensions
 
         static void Listen(KestrelServerOptions kestrelServerOptions, int? port, HttpProtocols protocols)
         {
-            if (port == null)
-                return;
-
-            var address = IPAddress.Any;
-
-
-            kestrelServerOptions.Listen(address, port.Value, listenOptions => { listenOptions.Protocols = protocols; });
+            if (port != null)
+            {
+                kestrelServerOptions.Listen(IPAddress.Any, port.Value,
+                    listenOptions => { listenOptions.Protocols = protocols; });
+            }
         }
     }
 }
