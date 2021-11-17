@@ -15,6 +15,15 @@ namespace OzonEdu.MerchendiseService.Migrator.Migrations
                     (4, 'ProbationPeriodEndingPack'),
                     (5, 'VeteranPack')
             ");
+            
+            Execute.Sql(@"
+                INSERT INTO merchendise_request_statuses (id, name)
+                VALUES 
+                    (1, 'Unknown'),
+                    (2, 'InProgress'),
+                    (3, 'Queued'),
+                    (4, 'Done')
+            ");
         }
     }
 }

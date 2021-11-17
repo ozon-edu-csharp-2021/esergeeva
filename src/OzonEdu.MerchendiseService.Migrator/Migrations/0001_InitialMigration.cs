@@ -23,8 +23,8 @@ namespace OzonEdu.MerchendiseService.Migrator.Migrations
             Execute.Sql(@"
                 CREATE TABLE merchendise_packs(
                     id BIGSERIAL PRIMARY KEY,
-                    pack_type INT,
-                    sku_items INT[] 
+                    pack_type BIGINT,
+                    sku_items BIGINT[] 
                 );
             ");
             
@@ -38,9 +38,9 @@ namespace OzonEdu.MerchendiseService.Migrator.Migrations
             Execute.Sql(@"
                 CREATE TABLE merchendise_requests(
                     id BIGSERIAL PRIMARY KEY,
-                    status INT NOT NULL,
-                    employee_id INT NOT NULL,
-                    merchendise_pack_type INT NOT NULL
+                    status BIGINT NOT NULL,
+                    employee_id BIGINT NOT NULL,
+                    merchendise_pack_type BIGINT NOT NULL
                 )
             ");
         }

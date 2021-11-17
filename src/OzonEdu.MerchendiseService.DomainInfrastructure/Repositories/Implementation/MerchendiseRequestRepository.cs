@@ -77,8 +77,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
         {
             const string sql = @"
                 SELECT merchendise_requests.id, merchendise_requests.employee_id, 
-                       merchendise_request_statuses.id, merchendise_request_statuses.name,
-                       merchendise_pack_types.id, merchendise_pack_types.name
+                       merchendise_pack_types.id, merchendise_pack_types.name,
+                       merchendise_request_statuses.id, merchendise_request_statuses.name
                 FROM merchendise_requests
                 INNER JOIN merchendise_pack_types on merchendise_requests.merchendise_pack_type = merchendise_pack_types.id
                 INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.id
@@ -97,6 +97,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
                     MerchendiseRequest>(commandDefinition,
                     (merchendiseRequest, packType, status) =>
                         new MerchendiseRequest(
+                            new MerchendiseRequestId(merchendiseRequest.Id),
                             new EmployeeId(merchendiseRequest.EmployeeId),
                             new MerchendisePackType(packType.Id, packType.Name),
                             new MerchendiseRequestStatus(status.Id, status.Name)
@@ -118,8 +119,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
         {
             const string sql = @"
                 SELECT merchendise_requests.id, merchendise_requests.employee_id, 
-                       merchendise_request_statuses.id, merchendise_request_statuses.name,
-                       merchendise_pack_types.id, merchendise_pack_types.name
+                       merchendise_pack_types.id, merchendise_pack_types.name,
+                       merchendise_request_statuses.id, merchendise_request_statuses.name
                 FROM merchendise_requests
                 INNER JOIN merchendise_pack_types on merchendise_requests.merchendise_pack_type = merchendise_pack_types.id
                 INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.id
@@ -136,8 +137,8 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
             var requests = await connection
                 .QueryAsync<Models.MerchendiseRequest, Models.MerchendiseRequestStatus, Models.MerchendisePackType,
                     MerchendiseRequest>(commandDefinition,
-                    (merchendiseRequest, packType, status) =>
-                        new MerchendiseRequest(
+                    (merchendiseRequest, packType, status) =>  new MerchendiseRequest(
+                            new MerchendiseRequestId(merchendiseRequest.Id),
                             new EmployeeId(merchendiseRequest.EmployeeId),
                             new MerchendisePackType(packType.Id, packType.Name),
                             new MerchendiseRequestStatus(status.Id, status.Name)
@@ -153,11 +154,11 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
         {
             const string sql = @"
                 SELECT merchendise_requests.id, merchendise_requests.employee_id, 
-                       merchendise_request_statuses.id, merchendise_request_statuses.name,
-                       merchendise_pack_types.id, merchendise_pack_types.name
+                       merchendise_pack_types.id, merchendise_pack_types.name,
+                       merchendise_request_statuses.id, merchendise_request_statuses.name
                 FROM merchendise_requests
-                INNER JOIN merchendise_pack_types on merchendise_requests.merchendise_pack_type = merchendise_pack_types.id
                 INNER JOIN merchendise_request_statuses on merchendise_requests.status = merchendise_request_statuses.id
+                INNER JOIN merchendise_pack_types on merchendise_requests.merchendise_pack_type = merchendise_pack_types.id
                 WHERE merchendise_requests.status = @RequestStatus
             ";
             var parameters = new
@@ -173,6 +174,7 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implement
                     MerchendiseRequest>(commandDefinition,
                     (merchendiseRequest, packType, status) =>
                         new MerchendiseRequest(
+                            new MerchendiseRequestId(merchendiseRequest.Id),
                             new EmployeeId(merchendiseRequest.EmployeeId),
                             new MerchendisePackType(packType.Id, packType.Name),
                             new MerchendiseRequestStatus(status.Id, status.Name)

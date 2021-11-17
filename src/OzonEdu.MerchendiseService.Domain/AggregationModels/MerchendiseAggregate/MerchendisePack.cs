@@ -7,6 +7,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
 {
     public sealed class MerchendisePack : Entity
     {
+        public MerchendisePackId PackId { get; private set; }
         public MerchendisePackType PackType { get; private set; }
         public IReadOnlyCollection<Sku> SkuItems { get; private set; }
 
@@ -24,6 +25,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
                 throw new MerchendisePackIdInvalidException("Merchendise pack id cannot be null");
             if (packId.Value <= 0)
                 throw new MerchendisePackIdInvalidException("Merchendise pack id must be positive");
+            PackId = packId;
         }
 
         private void SetItems(IReadOnlyCollection<Sku> items)

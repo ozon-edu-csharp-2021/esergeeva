@@ -9,7 +9,7 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
         public static readonly MerchendisePackType ConferenceSpeakerPack = new(3, nameof(ConferenceSpeakerPack));
         public static readonly MerchendisePackType ProbationPeriodEndingPack = new(4, nameof(ProbationPeriodEndingPack));
         public static readonly MerchendisePackType VeteranPack = new(5, nameof(VeteranPack));
-        public MerchendisePackType(int id, string name) : base(id, name)
+        public MerchendisePackType(long id, string name) : base(id, name)
         {
         }
     }

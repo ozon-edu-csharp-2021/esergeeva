@@ -33,7 +33,7 @@ namespace OzonEdu.MerchendiseService.Domain.Tests
                 new Sku(1),
                 new Sku(2)
             };
-            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(null, merchendisePackType, items));
+            Assert.Throws<MerchendisePackIdInvalidException>(() => new MerchendisePack(null, merchendisePackType, items));
         }     
 
         [Fact]
@@ -46,7 +46,7 @@ namespace OzonEdu.MerchendiseService.Domain.Tests
                 new Sku(1),
                 new Sku(2)
             };
-            Assert.Throws<MerchendisePackInvalidItemsException>(() => new MerchendisePack(packId, merchendisePackType, items));
+            Assert.Throws<MerchendisePackIdInvalidException>(() => new MerchendisePack(packId, merchendisePackType, items));
         }
 
         [Fact]

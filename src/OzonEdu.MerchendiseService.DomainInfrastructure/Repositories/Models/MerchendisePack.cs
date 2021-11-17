@@ -4,7 +4,9 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Models
 {
     public class MerchendisePack
     {
-        public int PackType { get; set; }
-        public ICollection<int> SkuItems { get; set; }
+        public long PackId { get; set; }
+        
+        public long PackType { get; set; }
+        public ICollection<long> SkuItems { get; set; }
     }
 }
