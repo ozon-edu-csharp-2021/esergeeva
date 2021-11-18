@@ -5,11 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Npgsql;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Exceptions;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Interfaces;
 using OzonEdu.MerchendiseService.Domain.Contracts;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Exceptions;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {

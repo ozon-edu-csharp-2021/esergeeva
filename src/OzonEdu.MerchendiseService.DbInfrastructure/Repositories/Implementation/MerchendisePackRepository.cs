@@ -3,13 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
 using Npgsql;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Interfaces;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces;
 using DomainMerchendisePack = OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.MerchendisePack;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implementation
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Repositories.Implementation
 {
     public class MerchendisePackRepository : IMerchendisePackRepository
     {

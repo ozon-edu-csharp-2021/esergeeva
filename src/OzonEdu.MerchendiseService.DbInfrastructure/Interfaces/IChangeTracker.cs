@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OzonEdu.MerchendiseService.Domain.Models;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Interfaces
 {
     public interface IChangeTracker
     {

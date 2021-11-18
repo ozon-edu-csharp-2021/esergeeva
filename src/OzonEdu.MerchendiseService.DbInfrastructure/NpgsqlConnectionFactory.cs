@@ -1,12 +1,12 @@
 ﻿using System.Data;
 using System.Threading;
-using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Npgsql;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Configuration;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces;
+using OzonEdu.MerchendiseService.DbInfrastructure.Configuration;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Interfaces;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure
 {
     public class NpgsqlConnectionFactory : IDbConnectionFactory<NpgsqlConnection>
     {

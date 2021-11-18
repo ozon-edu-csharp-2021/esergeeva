@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
+using OzonEdu.MerchendiseService.DbInfrastructure.Configuration;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Interfaces;
 using OzonEdu.MerchendiseService.Domain.Contracts;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Configuration;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces;
 using OzonEdu.MerchendiseService.Presentation.GrpcServices;
 
 namespace OzonEdu.MerchendiseService.Presentation

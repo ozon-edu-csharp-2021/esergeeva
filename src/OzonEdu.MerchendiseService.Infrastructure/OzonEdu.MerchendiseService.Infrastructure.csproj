@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\OzonEdu.MerchendiseService.DbInfrastructure\OzonEdu.MerchendiseService.DbInfrastructure.csproj" />
       <ProjectReference Include="..\OzonEdu.MerchendiseService.DomainInfrastructure\OzonEdu.MerchendiseService.DomainInfrastructure.csproj" />
     </ItemGroup>
 

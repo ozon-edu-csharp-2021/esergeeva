@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Interfaces;
 using OzonEdu.MerchendiseService.Domain.Models;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure
 {
     public class ChangeTracker : IChangeTracker
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Models
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Models
 {
     public class MerchendisePack
     {

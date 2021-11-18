@@ -6,7 +6,7 @@ using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Repositories.Stubs
 {
     internal class MerchendisePackRepository : IMerchendisePackRepository
     {

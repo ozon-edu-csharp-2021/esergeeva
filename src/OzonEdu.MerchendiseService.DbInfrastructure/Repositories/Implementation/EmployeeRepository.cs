@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using Dapper;
 using Npgsql;
+using OzonEdu.MerchendiseService.DbInfrastructure.Infrastructure.Interfaces;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
-using OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Infrastructure.Interfaces;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Repositories.Implementation
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Repositories.Implementation
 {
     public class EmployeeRepository : IEmployeeRepository
     {

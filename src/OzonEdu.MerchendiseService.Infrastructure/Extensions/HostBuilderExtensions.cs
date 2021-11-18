@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OzonEdu.MerchendiseService.DbInfrastructure.Extensions;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Extensions;
 using OzonEdu.MerchendiseService.Infrastructure.Filters;
 using OzonEdu.MerchendiseService.Infrastructure.Interceptors;
@@ -26,7 +27,8 @@ namespace OzonEdu.MerchendiseService.Infrastructure.Extensions
 
                 services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
 
-                services.AddInfrastructureServices();
+                services.AddDbInfrastructureServices();
+                services.AddDomainInfrastructureServices();
 
                 services.AddSwaggerGen(options =>
                 {

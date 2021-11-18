@@ -1,4 +1,4 @@
-﻿namespace OzonEdu.MerchendiseService.DomainInfrastructure.Configuration
+﻿namespace OzonEdu.MerchendiseService.DbInfrastructure.Configuration
 {
     public class DatabaseConnectionOptions
     {
