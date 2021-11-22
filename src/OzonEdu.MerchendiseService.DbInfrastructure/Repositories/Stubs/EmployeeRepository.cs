@@ -4,15 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
-using OzonEdu.MerchendiseService.Domain.Contracts;
 using OzonEdu.MerchendiseService.Domain.Exceptions;
 
-namespace OzonEdu.MerchendiseService.DomainInfrastructure.Stubs
+namespace OzonEdu.MerchendiseService.DbInfrastructure.Repositories.Stubs
 {
     internal class EmployeeRepository : IEmployeeRepository
     {
-        public IUnitOfWork UnitOfWork { get; } = new UnitOfWork();
-
         private readonly Dictionary<long, Employee> _employees = new()
         {
             {1, new Employee(new EmployeeId(1), new HiringDate(new DateTime(2021, 04, 01)))},

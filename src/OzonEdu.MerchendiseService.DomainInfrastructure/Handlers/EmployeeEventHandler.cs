@@ -6,6 +6,7 @@ using MediatR;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.EmployeeAggregate.ValueObjects;
 using OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequestAggregate;
+using OzonEdu.MerchendiseService.Domain.Contracts;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.OuterCommands;
 using OzonEdu.MerchendiseService.DomainInfrastructure.Commands.RequestMerchendise;
 
@@ -13,13 +14,15 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 {
     internal class EmployeeEventHandler : IRequestHandler<EmployeeEventCommand>
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMerchendiseRequestRepository _merchendiseRequestRepository;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMediator _mediator;
 
-        public EmployeeEventHandler(IMerchendiseRequestRepository merchendiseRequestRepository,
+        public EmployeeEventHandler(IUnitOfWork unitOfWork, IMerchendiseRequestRepository merchendiseRequestRepository,
             IEmployeeRepository employeeRepository, IMediator mediator)
         {
+            _unitOfWork = unitOfWork;
             _merchendiseRequestRepository = merchendiseRequestRepository;
             _employeeRepository = employeeRepository;
             _mediator = mediator;
@@ -45,15 +48,19 @@ namespace OzonEdu.MerchendiseService.DomainInfrastructure.Handlers
 
         private async Task AddNewEmployee(long employeeId, CancellationToken cancellationToken)
         {
+            await _unitOfWork.StartTransaction(cancellationToken);
             var newEmployee = new Employee(new EmployeeId(employeeId), new HiringDate(DateTime.Now.ToUniversalTime()));
             await _employeeRepository.CreateAsync(newEmployee, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
         private async Task RemoveEmployee(long employeeId, CancellationToken cancellationToken)
         {
+            await _unitOfWork.StartTransaction(cancellationToken);
             await _merchendiseRequestRepository.DeleteAllByEmployeeIdAsync(new EmployeeId(employeeId),
                 cancellationToken);
             await _employeeRepository.DeleteByIdAsync(employeeId, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
         private async Task RequestMerchendise(EmployeeEventCommand request, CancellationToken cancellationToken)

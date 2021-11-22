@@ -16,12 +16,24 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseRequest
         public EmployeeId EmployeeId { get; private set; }
         public MerchendisePackType MerchendisePackType { get; private set; }
 
-        public MerchendiseRequest(EmployeeId employeeId,
-            MerchendisePackType merchendisePackType)
+        public MerchendiseRequest(EmployeeId employeeId, MerchendisePackType merchendisePackType)
+            : this(new MerchendiseRequestId(0),
+                employeeId,
+                merchendisePackType,
+                MerchendiseRequestStatus.Unknown)
         {
+        }
+
+        public MerchendiseRequest(
+            MerchendiseRequestId requestId,
+            EmployeeId employeeId,
+            MerchendisePackType merchendisePackType,
+            MerchendiseRequestStatus status)
+        {
+            SetRequestId(requestId);
             SetEmployeeId(employeeId);
             SetPackType(merchendisePackType);
-            ChangeStatus(MerchendiseRequestStatus.Unknown);
+            ChangeStatus(status);
         }
 
         public void SetRequestId(MerchendiseRequestId requestId)

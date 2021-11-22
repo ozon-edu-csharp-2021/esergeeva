@@ -3,11 +3,11 @@ using OzonEdu.MerchendiseService.Domain.Models;
 
 namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggregate.ValueObjects
 {
-    public sealed class Quantity: ValueObject
+    public sealed class MerchendisePackId: ValueObject
     {
         public long Value { get; }
 
-        public Quantity(long value)
+        public MerchendisePackId(long value)
         {
             Value = value;
         }
@@ -16,10 +16,10 @@ namespace OzonEdu.MerchendiseService.Domain.AggregationModels.MerchendiseAggrega
         {
             yield return Value;
         }
-        
+
         public override string ToString()
         {
-            return $"Quantity({Value})";
+            return $"PackId({Value})";
         }
     }
 }

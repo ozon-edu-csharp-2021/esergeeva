@@ -13,6 +13,7 @@ namespace OzonEdu.MerchendiseService.Presentation
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigurePorts()
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .AddInfrastructure();
     }

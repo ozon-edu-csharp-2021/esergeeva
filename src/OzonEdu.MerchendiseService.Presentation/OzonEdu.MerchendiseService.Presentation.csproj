@@ -9,6 +9,7 @@
       <ProjectReference Include="..\OzonEdu.MerchendiseService.Grpc\OzonEdu.MerchendiseService.Grpc.csproj" />
       <ProjectReference Include="..\OzonEdu.MerchendiseService.HttpModels\OzonEdu.MerchendiseService.HttpModels.csproj" />
       <ProjectReference Include="..\OzonEdu.MerchendiseService.Infrastructure\OzonEdu.MerchendiseService.Infrastructure.csproj" />
+      <ProjectReference Include="..\OzonEdu.MerchendiseService.Migrator\OzonEdu.MerchendiseService.Migrator.csproj" />
     </ItemGroup>
 
 </Project>
